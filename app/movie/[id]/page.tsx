@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import MoviePlayer from '@/components/movie/MoviePlayer';
+import WatchlistButton from '@/components/common/WatchlistButton';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -40,7 +41,7 @@ export default async function MoviePage({ params }: PageProps) {
           className="object-cover"
           priority
         />
-        
+
         <div className="absolute bottom-0 z-20 flex w-full flex-col justify-end p-6 md:p-12">
           <div className="max-w-4xl">
             <h1 className="text-4xl font-bold text-white md:text-6xl">{movie.title}</h1>
@@ -54,6 +55,9 @@ export default async function MoviePage({ params }: PageProps) {
             <p className="mt-4 line-clamp-3 text-lg text-zinc-400 md:line-clamp-none">
               {movie.overview}
             </p>
+            <div className="mt-6">
+              <WatchlistButton movie={movie} />
+            </div>
           </div>
         </div>
       </div>
