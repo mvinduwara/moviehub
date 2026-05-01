@@ -7,7 +7,7 @@ export async function GET() {
   try {
     const response = await fetch(
       `${TMDB_BASE_URL}/trending/movie/day?api_key=${TMDB_API_KEY}&language=en-US`,
-      { next: { revalidate: 3600 } } // Edge caching for 1 hour
+      { next: { revalidate: 3600 } } 
     );
 
     if (!response.ok) {
