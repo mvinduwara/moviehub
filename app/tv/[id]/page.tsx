@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { TVShow } from '@/types/tv';
+import SubtitlePanel from '@/components/player/SubtitlePanel';
 
 interface PageProps {
   params: Promise<{ id: string }>;
