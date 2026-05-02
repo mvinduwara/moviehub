@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import MoviePlayer from '@/components/movie/MoviePlayer';
 import WatchlistButton from '@/components/common/WatchlistButton';
 import ProgressTracker from '@/components/player/ProgressTracker';
+import SubtitlePanel from '@/components/player/SubtitlePanel';
 
 interface PageProps {
   params: Promise<{ id: string }>;
