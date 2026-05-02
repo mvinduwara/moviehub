@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import MoviePlayer from '@/components/movie/MoviePlayer';
 import WatchlistButton from '@/components/common/WatchlistButton';
+import ProgressTracker from '@/components/player/ProgressTracker';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -64,6 +65,14 @@ export default async function MoviePage({ params }: PageProps) {
 
       <div className="px-4 md:px-12 mt-8">
         <h2 className="text-2xl font-bold text-white mb-4">Watch Now</h2>
+        <ProgressTracker
+          item={{
+            id: movie.id,
+            title: movie.title,
+            poster_path: movie.poster_path,
+            type: 'movie',
+          }}
+        />
         <MoviePlayer tmdbId={movie.id} />
       </div>
     </main>
