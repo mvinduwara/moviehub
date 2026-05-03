@@ -1,4 +1,4 @@
-import MovieCard from '@/components/MovieCard';
+import MovieCard from '@/components/movie/MovieCard';
 import { TMDBResponse } from '@/types/movie';
 
 interface SearchPageProps {
