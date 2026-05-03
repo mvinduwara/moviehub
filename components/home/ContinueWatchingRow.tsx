@@ -1,19 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContinueWatchingStore } from '@/store/continueWatchingStore';
+import { useStore } from '@/hooks/useStore';
 
 export default function ContinueWatchingRow() {
-  const [isMounted, setIsMounted] = useState(false);
-  const { items, removeItem } = useContinueWatchingStore();
+  const store = useStore(useContinueWatchingStore, (state) => state);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted || items.length === 0) return null;
+  if (!store || store.items.length === 0) return null;
 
   return (
     <div className="mb-12">
@@ -22,7 +17,7 @@ export default function ContinueWatchingRow() {
       </h2>
       
       <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-        {items.map((item) => {
+        {store.items.map((item) => {
           const href = item.type === 'movie' 
             ? `/movie/${item.id}` 
             : `/tv/${item.id}/${item.season}/${item.episode}`;
@@ -37,7 +32,6 @@ export default function ContinueWatchingRow() {
                     fill
                     className="object-cover opacity-60 transition-opacity group-hover:opacity-100"
                   />
-                  {/* Play Icon Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="rounded-full bg-red-600/80 p-3 text-white backdrop-blur-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-1">
@@ -54,11 +48,10 @@ export default function ContinueWatchingRow() {
                 </div>
               </Link>
               
-            
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  removeItem(item.id);
+                  store.removeItem(item.id);
                 }}
                 className="absolute top-2 right-2 z-10 rounded-full bg-black/60 p-1.5 text-zinc-300 opacity-0 transition-opacity hover:bg-black hover:text-white group-hover:opacity-100"
               >

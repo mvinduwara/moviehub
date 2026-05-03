@@ -1,30 +1,26 @@
+// components/common/WatchlistButton.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useWatchlistStore } from '@/store/watchlistStore';
-import { Movie } from '@/types/movie';
+import { useStore } from '@/hooks/useStore';
 
 interface WatchlistButtonProps {
-  movie: Movie;
+  movie: any; // Accommodates both TV and Movies
 }
 
 export default function WatchlistButton({ movie }: WatchlistButtonProps) {
-  const [isMounted, setIsMounted] = useState(false);
-  const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlistStore();
+  // Fetch the entire store object safely
+  const store = useStore(useWatchlistStore, (state) => state);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  if (!store) return null;
 
-  if (!isMounted) return null;
-
-  const isSaved = isInWatchlist(movie.id);
+  const isSaved = store.isInWatchlist(movie.id);
 
   const toggleWatchlist = () => {
     if (isSaved) {
-      removeFromWatchlist(movie.id);
+      store.removeFromWatchlist(movie.id);
     } else {
-      addToWatchlist(movie);
+      store.addToWatchlist(movie);
     }
   };
 

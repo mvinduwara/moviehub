@@ -1,8 +1,20 @@
+// components/movie/MovieCard.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Define a type that handles properties from both TMDB Movies and TV Shows
+interface MediaItem {
+  id: number;
+  poster_path?: string;
+  vote_average?: number;
+  title?: string;
+  name?: string;
+  release_date?: string;
+  first_air_date?: string;
+}
+
 interface MovieCardProps {
-  movie: any; 
+  movie: MediaItem; 
   mediaType?: 'movie' | 'tv';
 }
 
@@ -18,7 +30,7 @@ export default function MovieCard({ movie, mediaType = 'movie' }: MovieCardProps
         {movie.poster_path ? (
            <Image
              src={posterUrl}
-             alt={title}
+             alt={title || 'Media Poster'}
              fill
              className="object-cover"
              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -1,8 +1,16 @@
-// app/genre/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import MovieCard from '@/components/movie/MovieCard';
 
-// Map URL slugs to TMDB Genre IDs
+interface MediaItem {
+  id: number;
+  poster_path?: string;
+  vote_average?: number;
+  title?: string;
+  name?: string;
+  release_date?: string;
+  first_air_date?: string;
+}
+
 const GENRE_MAP: Record<string, { id: number; name: string }> = {
   action: { id: 28, name: 'Action' },
   comedy: { id: 35, name: 'Comedy' },
@@ -48,7 +56,7 @@ export default async function GenrePage({ params }: GenrePageProps) {
         
         {data?.results && data.results.length > 0 ? (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {data.results.map((movie: any) => (
+            {data.results.map((movie: MediaItem) => (
               <MovieCard key={movie.id} movie={movie} mediaType="movie" />
             ))}
           </div>

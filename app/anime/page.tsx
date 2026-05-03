@@ -1,5 +1,15 @@
 import MovieCard from '@/components/movie/MovieCard';
 
+interface MediaItem {
+  id: number;
+  poster_path?: string;
+  vote_average?: number;
+  title?: string;
+  name?: string;
+  release_date?: string;
+  first_air_date?: string;
+}
+
 async function getAnimeShows() {
   const TMDB_API_KEY = process.env.TMDB_API_KEY;
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
@@ -27,7 +37,7 @@ export default async function AnimePage() {
         </div>
         
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-          {data.results.map((show: any) => (
+          {data.results.map((show: MediaItem) => (
             <MovieCard key={show.id} movie={show} mediaType="tv" />
           ))}
         </div>

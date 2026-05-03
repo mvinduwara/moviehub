@@ -1,18 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useWatchlistStore } from '@/store/watchlistStore';
+import { useStore } from '@/hooks/useStore';
 import MovieCard from '@/components/movie/MovieCard';
 
 export default function WatchlistPage() {
-  const [isMounted, setIsMounted] = useState(false);
-  const { watchlist } = useWatchlistStore();
+  const watchlist = useStore(useWatchlistStore, (state) => state.watchlist);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
+  if (watchlist === undefined) {
     return <main className="min-h-screen bg-zinc-950 p-6 pt-24" />;
   }
 

@@ -32,7 +32,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <main className="min-h-screen bg-zinc-950 p-6 pt-24 text-white">
       <div className="mx-auto max-w-7xl">
         <h1 className="mb-6 text-2xl font-bold tracking-tight text-white">
-          Search Results for: <span className="text-red-600">"{query}"</span>
+          Search Results for: <span className="text-red-600">&quot;{query}&quot;</span>
         </h1>
         
         {data?.results && data.results.length > 0 ? (
