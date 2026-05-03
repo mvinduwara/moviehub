@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useWatchlistStore } from '@/store/watchlistStore';
-import MovieCard from '@/components/MovieCard';
+import MovieCard from '@/components/movie/MovieCard';
 
 export default function WatchlistPage() {
   const [isMounted, setIsMounted] = useState(false);
